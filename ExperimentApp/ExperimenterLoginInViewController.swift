@@ -20,28 +20,34 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var uidWrongLabel: UILabel!
     @IBOutlet weak var passwordWrongLabel: UILabel!
     
-    func errorMessage(of error: Error) -> String {
+    func errorMessage(of error: Error?) {
         
         var message = "エラーが発生しました"
-        guard let errcd = AuthErrorCode(rawValue: (error as NSError).code) else {
-            return message
+        guard let errcd = AuthErrorCode(rawValue: (error! as NSError).code) else {
+            return
         }
-        
         switch errcd {
-        case .networkError: message = "ネットワークに接続できません"
-        case .userNotFound: message = "ユーザが見つかりません"
+        case .networkError:
+            message = "ネットワークに接続できません"
+            AlertContrller.showAlert(self, title: "Missing Info", message: message)
+        case .userNotFound:
+            message = "ユーザが見つかりません"
+            uidWrongLabel.text = message
         case .wrongPassword: message = "パスワードは間違っています"
+            passwordWrongLabel.text = message
         default: break
         }
-        return message
+//        return message
         
     }
     
-    func showErrorIfNeeded(_ errorOrNil: Error?) {
-        guard let error = errorOrNil else { return }
-        let message = errorMessage(of: error)
-        AlertContrller.showAlert(self, title: "Missing Info", message: message)
-    }
+//    func showErrorIfNeeded(_ errorOrNil: Error?) {
+//        guard let error = errorOrNil else { return }
+//        let message = errorMessage(of: error)
+//        AlertContrller.showAlert(self, title: "Missing Info", message: message)
+//    }
+    
+
     
     @IBAction func logInButton(_ sender: Any) {
         
@@ -52,7 +58,7 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
                 if user != nil {
                     self.performSegue(withIdentifier: "goToHome", sender: self)
                 } else {
-                    self.showErrorIfNeeded(error)
+                    self.errorMessage(of: error)
                 }
             }
 
@@ -66,10 +72,11 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
         guard let email = mailTextField.text else { return }
         Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
             guard let self = self else { return }
-            if error != nil {
-                
+            if error == nil {
+                print("accomplished")
+            } else {
+                AlertContrller.showAlert(self, title: "Missing Info", message: "Invalid Email")
             }
-            AlertContrller.showAlert(self, title: "Missing Info", message: "Error")
         }
        
         
@@ -82,6 +89,9 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.uidWrongLabel.text = ""
+//        self.passwordWrongLabel.text = ""
         
         let idborder = CALayer()
         let psborder = CALayer()
