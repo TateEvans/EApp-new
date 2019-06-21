@@ -17,8 +17,7 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var logInLabel: UILabel!
     @IBOutlet weak var mailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var uidWrongLabel: UILabel!
-    @IBOutlet weak var passwordWrongLabel: UILabel!
+    @IBOutlet weak var alertLabel: UILabel!
     
     func errorMessage(of error: Error?) {
         
@@ -31,10 +30,11 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
             message = "ネットワークに接続できません"
             AlertContrller.showAlert(self, title: "Missing Info", message: message)
         case .userNotFound:
-            message = "ユーザが見つかりません"
-            uidWrongLabel.text = message
-        case .wrongPassword: message = "パスワードは間違っています"
-            passwordWrongLabel.text = message
+            message = "*メールアドレスまたはパスワードは\n間違っています"
+            alertLabel.text = message
+        case .wrongPassword:
+            message = "*メールアドレスまたはパスワードは\n間違っています"
+            alertLabel.text = message
         default: break
         }
     }
@@ -65,7 +65,7 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
             if error == nil {
                
             } else {
-                AlertContrller.showAlert(self, title: "Missing Info", message: "Invalid Email")
+                AlertContrller.showAlert(self, title: "Missing Info", message: "Sending error")
             }
         }
        
@@ -73,11 +73,12 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func mailTextField(_ sender: UITextField) {
-        self.uidWrongLabel.text = ""
+        alertLabel.text = ""
     }
     @IBAction func passwordTextField(_ sender: UITextField) {
-        self.passwordWrongLabel.text = ""
+        alertLabel.text = ""
     }
+    
     
     @IBAction func newLogButton(_ sender: UIButton) {
     }
@@ -109,6 +110,8 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
         
         self.mailTextField.attributedPlaceholder = NSAttributedString(string: "メールアドレス", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 0.7294, green: 0.7843, blue: 0.8275, alpha: 1.0)])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "パスワード", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 0.7294, green: 0.7843, blue: 0.8275, alpha: 1.0)])
+        
+        alertLabel.numberOfLines = 0
         
 //       self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
