@@ -20,6 +20,11 @@ class ExperimenterNewLognViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var newMailTextField: UITextField!
     @IBOutlet weak var newPasswordTextField: UITextField!
     @IBOutlet weak var newAlertLabel: UILabel!
+    @IBOutlet weak var universityAlert: UILabel!
+    @IBOutlet weak var studentIdAlert: UILabel!
+    @IBOutlet weak var mailAlert: UILabel!
+    @IBOutlet weak var passwordAlert: UILabel!
+    
     @IBAction func backArrow(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -42,31 +47,45 @@ class ExperimenterNewLognViewController: UIViewController, UITextFieldDelegate {
         default: break
         }
     }
-
-    
     
     @IBAction func newSignUpButton(_ sender: Any) {
     
-        if let email = newMailTextField.text,
+        if let university = newUniversityTextField.text,
+            let studentId = newIdTextField.text,
+            let email = newMailTextField.text,
            let password = newPasswordTextField.text {
 
-            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if university == ""  {
+                self.universityAlert.text = "*大学名を入力してください"
+            } else if studentId == ""{
+                self.studentIdAlert.text = "*学生番号を入力してください"
+            } else {
+                
+                Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                
 //                let user = Auth.auth().currentUser
-                
-                if user != nil {
-                    
-                    print("successfully")
-                    self.addUniversityStudentId()
-                    
-                } else {
-                    
-                    print("fail")
-                    self.errorMessage(of: error)
+              
+                    if user != nil {
+                        
+                        print("successfully")
+                        self.addUniversityStudentId()
+                        
+                    } else {
+                        print("fail")
+                        self.errorMessage(of: error)
+                        
+                        if email == "" {
+                            self.mailAlert.text = "*メールアドレスを入力してください"
+                        }
+                        if password == "" {
+                            self.passwordAlert.text = "*パスワードを入力してください"
+                        }
+                    }
                 }
             }
 
         } else {
+            print("error")
             AlertContrller.showAlert(self, title: "Missing Info", message: "Error")
         }
 
@@ -97,11 +116,22 @@ class ExperimenterNewLognViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func mailChanged(_ sender: UITextField) {
         newAlertLabel.text = ""
+        mailAlert.text = ""
     }
     
     @IBAction func passwordChanged(_ sender: UITextField) {
         newAlertLabel.text = ""
+        passwordAlert.text = ""
     }
+    
+    @IBAction func universityChanged(_ sender: UITextField) {
+        universityAlert.text = ""
+    }
+    
+    @IBAction func studentIdChanged(_ sender: UITextField) {
+        studentIdAlert.text = ""
+    }
+    
     
     
     
