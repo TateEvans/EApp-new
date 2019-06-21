@@ -17,30 +17,26 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var logInLabel: UILabel!
     @IBOutlet weak var mailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var uidWrongLabel: UILabel!
-    @IBOutlet weak var passwordWrongLabel: UILabel!
+    @IBOutlet weak var alertLabel: UILabel!
     
-    func errorMessage(of error: Error) -> String {
+    func errorMessage(of error: Error?) {
         
         var message = "エラーが発生しました"
-        guard let errcd = AuthErrorCode(rawValue: (error as NSError).code) else {
-            return message
+        guard let errcd = AuthErrorCode(rawValue: (error! as NSError).code) else {
+            return
         }
-        
         switch errcd {
-        case .networkError: message = "ネットワークに接続できません"
-        case .userNotFound: message = "ユーザが見つかりません"
-        case .wrongPassword: message = "パスワードは間違っています"
+        case .networkError:
+            message = "ネットワークに接続できません"
+            AlertContrller.showAlert(self, title: "Missing Info", message: message)
+        case .userNotFound:
+            message = "*メールアドレスまたはパスワードは\n間違っています"
+            alertLabel.text = message
+        case .wrongPassword:
+            message = "*メールアドレスまたはパスワードは\n間違っています"
+            alertLabel.text = message
         default: break
         }
-        return message
-        
-    }
-    
-    func showErrorIfNeeded(_ errorOrNil: Error?) {
-        guard let error = errorOrNil else { return }
-        let message = errorMessage(of: error)
-        AlertContrller.showAlert(self, title: "Missing Info", message: message)
     }
     
     @IBAction func logInButton(_ sender: Any) {
@@ -52,7 +48,7 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
                 if user != nil {
                     self.performSegue(withIdentifier: "goToHome", sender: self)
                 } else {
-                    self.showErrorIfNeeded(error)
+                    self.errorMessage(of: error)
                 }
             }
 
@@ -66,13 +62,21 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
         guard let email = mailTextField.text else { return }
         Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
             guard let self = self else { return }
-            if error != nil {
-                
+            if error == nil {
+               
+            } else {
+                AlertContrller.showAlert(self, title: "Missing Info", message: "Sending error")
             }
-            AlertContrller.showAlert(self, title: "Missing Info", message: "Error")
         }
        
         
+    }
+
+    @IBAction func mailTextField(_ sender: UITextField) {
+        alertLabel.text = ""
+    }
+    @IBAction func passwordTextField(_ sender: UITextField) {
+        alertLabel.text = ""
     }
     
     
@@ -106,6 +110,8 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
         
         self.mailTextField.attributedPlaceholder = NSAttributedString(string: "メールアドレス", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 0.7294, green: 0.7843, blue: 0.8275, alpha: 1.0)])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "パスワード", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 0.7294, green: 0.7843, blue: 0.8275, alpha: 1.0)])
+        
+        alertLabel.numberOfLines = 0
         
 //       self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }

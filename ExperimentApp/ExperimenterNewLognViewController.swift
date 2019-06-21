@@ -19,33 +19,30 @@ class ExperimenterNewLognViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var newIdTextField: UITextField!
     @IBOutlet weak var newMailTextField: UITextField!
     @IBOutlet weak var newPasswordTextField: UITextField!
+    @IBOutlet weak var newAlertLabel: UILabel!
     @IBAction func backArrow(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
 
-    func errorMessage(of error: Error) -> String {
+    func errorMessage(of error: Error?) {
         
         var message = "エラーが発生しました"
-        guard let errcd = AuthErrorCode(rawValue: (error as NSError).code) else {
-            return message
-        }
+        guard let errcd = AuthErrorCode(rawValue: (error! as NSError).code) else { return }
         
         switch errcd {
-        case .networkError: message = "ネットワークに接続できません"
-        case .invalidEmail: message = "不正なメールアドレスですメールアドレスの形式が正しくありません"
-        case .emailAlreadyInUse: message = "このメールアドレスはすでに使われています"
+        case .networkError:
+            message = "ネットワークに接続できません"
+            AlertContrller.showAlert(self, title: "Missing Info", message: message)
+        case .invalidEmail:
+            message = "*メールアドレスの形式が\n正しくありません"
+            newAlertLabel.text = message
+        case .emailAlreadyInUse:
+            message = "*このメールアドレスはすでに\n使われています"
+            newAlertLabel.text = message
         default: break
         }
-        return message
-        
     }
-    
-    func showErrorIfNeeded(_ errorOrNil: Error?) {
-        guard let error = errorOrNil else { return }
-        let message = errorMessage(of: error)
-        AlertContrller.showAlert(self, title: "Missing Info", message: message)
-    }
-    
+
     
     
     @IBAction func newSignUpButton(_ sender: Any) {
@@ -55,14 +52,17 @@ class ExperimenterNewLognViewController: UIViewController, UITextFieldDelegate {
 
             Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                
-                let user = Auth.auth().currentUser
+//                let user = Auth.auth().currentUser
                 
                 if user != nil {
                     
+                    print("successfully")
                     self.addUniversityStudentId()
                     
                 } else {
-                    AlertContrller.showAlert(self, title: "Missing Info", message: "Error")
+                    
+                    print("fail")
+                    self.errorMessage(of: error)
                 }
             }
 
@@ -93,6 +93,14 @@ class ExperimenterNewLognViewController: UIViewController, UITextFieldDelegate {
         }
         
     
+    }
+    
+    @IBAction func mailChanged(_ sender: UITextField) {
+        newAlertLabel.text = ""
+    }
+    
+    @IBAction func passwordChanged(_ sender: UITextField) {
+        newAlertLabel.text = ""
     }
     
     
