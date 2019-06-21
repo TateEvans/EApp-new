@@ -37,17 +37,7 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
             passwordWrongLabel.text = message
         default: break
         }
-//        return message
-        
     }
-    
-//    func showErrorIfNeeded(_ errorOrNil: Error?) {
-//        guard let error = errorOrNil else { return }
-//        let message = errorMessage(of: error)
-//        AlertContrller.showAlert(self, title: "Missing Info", message: message)
-//    }
-    
-aaaaaaaaaaaaaaaaaaaa
     
     @IBAction func logInButton(_ sender: Any) {
         
@@ -73,7 +63,7 @@ aaaaaaaaaaaaaaaaaaaa
         Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
             guard let self = self else { return }
             if error == nil {
-                print("accomplished")
+               
             } else {
                 AlertContrller.showAlert(self, title: "Missing Info", message: "Invalid Email")
             }
@@ -81,7 +71,13 @@ aaaaaaaaaaaaaaaaaaaa
        
         
     }
-    
+
+    @IBAction func mailTextField(_ sender: UITextField) {
+        self.uidWrongLabel.text = ""
+    }
+    @IBAction func passwordTextField(_ sender: UITextField) {
+        self.passwordWrongLabel.text = ""
+    }
     
     @IBAction func newLogButton(_ sender: UIButton) {
     }
@@ -89,9 +85,6 @@ aaaaaaaaaaaaaaaaaaaa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.uidWrongLabel.text = ""
-//        self.passwordWrongLabel.text = ""
         
         let idborder = CALayer()
         let psborder = CALayer()
