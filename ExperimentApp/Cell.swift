@@ -57,8 +57,8 @@ class Cell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func fill(title: String, date: String) {
-        titleLabel.text = title
-        dateLabel.text = date
-    }
+//    func fill(title: String, date: String) {
+//        titleLabel.text = title
+//        dateLabel.text = date
+//    }
 }

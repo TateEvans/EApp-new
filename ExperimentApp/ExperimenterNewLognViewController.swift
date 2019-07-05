@@ -107,7 +107,7 @@ class ExperimenterNewLognViewController: UIViewController, UITextFieldDelegate {
                 print("Error adding document: \(err)")
             } else {
                 print("成功した")
-                self.performSegue(withIdentifier: "goToHome", sender: self)
+                self.performSegue(withIdentifier: "goToEditing", sender: self)
             }
         }
         
