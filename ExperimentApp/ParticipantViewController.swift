@@ -30,6 +30,21 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func floatingButton(_ sender: UIButton) {
     }
     
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item.tag {
+        case 1:
+            print("recentItem be tapped")
+        case 2:
+            self.performSegue(withIdentifier: "goToBooked", sender: self)
+        case 3:
+            self.performSegue(withIdentifier: "goToMessager", sender: self)
+        case 4:
+            self.performSegue(withIdentifier: "goToProfile", sender: self)
+        default:
+            return
+        }
+    }
+    
     @IBAction func favoriteButton(_ sender: UIButton) {
         allButton.setTitleColor(#colorLiteral(red: 0.7567955852, green: 0.7569057345, blue: 0.7567715049, alpha: 1), for: .normal)
         favoriteButton.setTitleColor(#colorLiteral(red: 0.2523448765, green: 0.5975832939, blue: 0.8585820794, alpha: 1), for: .normal)
