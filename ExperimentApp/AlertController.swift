@@ -17,7 +17,6 @@ class AlertContrller {
         alert.addAction(action)
         inViewController.present(alert, animated: true, completion: nil)
         
-        
     }
     
 }
