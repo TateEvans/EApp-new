@@ -10,7 +10,8 @@ import UIKit
 
 class ExperimentEditingController: UIViewController {
     
-        @IBAction func backArrow(_ sender: UIButton) {
+ 
+    @IBAction func backArrow(_ sender: UIButton) {
             dismiss(animated: true, completion: nil)
         }
     
