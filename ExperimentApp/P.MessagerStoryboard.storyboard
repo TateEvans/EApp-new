@@ -12,7 +12,6 @@
         <!--チャット-->
         <scene sceneID="UTn-7s-n0Y">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uRz-fs-kan" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="xU8-zO-flz" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cMR-hf-UHh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -35,15 +34,15 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="チャット" id="d3g-Pd-Wtb"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uRz-fs-kan" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-332" y="170"/>
         </scene>
-        <!--チャット-->
+        <!--トーク-->
         <scene sceneID="kCL-aC-Bdj">
             <objects>
-                <navigationController id="PfY-TG-r2g" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="チャット" image="chat" id="su6-7v-pFd"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                <navigationController toolbarHidden="NO" id="PfY-TG-r2g" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="トーク" image="chat" id="su6-7v-pFd"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iMP-CD-JpM">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

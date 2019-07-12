@@ -38,11 +38,11 @@
             </objects>
             <point key="canvasLocation" x="236" y="123"/>
         </scene>
-        <!--Item-->
+        <!--本人-->
         <scene sceneID="tpw-No-1jl">
             <objects>
                 <navigationController id="mMJ-jc-RP1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="PCv-eJ-IdZ"/>
+                    <tabBarItem key="tabBarItem" title="本人" image="profile" id="PCv-eJ-IdZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o8I-LN-5Fe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -57,4 +57,7 @@
             <point key="canvasLocation" x="-683" y="123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="profile" width="30" height="30"/>
+    </resources>
 </document>

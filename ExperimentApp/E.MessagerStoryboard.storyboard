@@ -38,11 +38,11 @@
             </objects>
             <point key="canvasLocation" x="310" y="151"/>
         </scene>
-        <!--Item-->
+        <!--トーク-->
         <scene sceneID="xti-nq-vjj">
             <objects>
                 <navigationController id="0v9-YK-Psd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Ie7-YJ-txQ"/>
+                    <tabBarItem key="tabBarItem" title="トーク" image="chat" id="Ie7-YJ-txQ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4fJ-bd-cYs">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -57,4 +57,7 @@
             <point key="canvasLocation" x="-609" y="151"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chat" width="30" height="30"/>
+    </resources>
 </document>
