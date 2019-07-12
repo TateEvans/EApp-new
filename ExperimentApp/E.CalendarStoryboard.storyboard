@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--登載済み-->
         <scene sceneID="LDp-Yq-God">
             <objects>
                 <viewController id="WE9-bX-Dja" sceneMemberID="viewController">
@@ -20,7 +20,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="SC1-UW-f7H"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="sMy-CA-g1e"/>
+                    <tabBarItem key="tabBarItem" title="登載済み" image="calendar" id="sMy-CA-g1e"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJK-LS-faI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,4 +28,7 @@
             <point key="canvasLocation" x="41" y="43"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="calendar" width="30" height="30"/>
+    </resources>
 </document>
