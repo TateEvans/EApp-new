@@ -19,17 +19,7 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var favoriteButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var tabBar: UITabBar!
-    @IBOutlet weak var recentItem: UITabBarItem!
-    @IBOutlet weak var bookedItem: UITabBarItem!
-    @IBOutlet weak var chatItem: UITabBarItem!
-    @IBOutlet weak var profileItem: UITabBarItem!
-    
-    @IBOutlet weak var floatingButton: UIButton!
-    @IBAction func floatingButton(_ sender: UIButton) {
-    }
-    
+
     @IBAction func favoriteButton(_ sender: UIButton) {
         allButton.setTitleColor(#colorLiteral(red: 0.7567955852, green: 0.7569057345, blue: 0.7567715049, alpha: 1), for: .normal)
         favoriteButton.setTitleColor(#colorLiteral(red: 0.2523448765, green: 0.5975832939, blue: 0.8585820794, alpha: 1), for: .normal)
@@ -53,28 +43,22 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tabBar.delegate = self
+        
         
         information = createArray()
         
         
-        var insets = UIEdgeInsets()
-        insets.top = 3
-        insets.bottom = -3.0
+//        var insets = UIEdgeInsets()
+//        insets.top = 3
+//        insets.bottom = -3.0
+//
+//        self.recentItem.imageInsets = insets
+//        self.recentItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 3)
+       
         
-        self.recentItem.imageInsets = insets
-        self.recentItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 3)
-        self.bookedItem.imageInsets = insets
-        self.bookedItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 3)
-        self.chatItem.imageInsets = insets
-        self.chatItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 3)
-        self.profileItem.imageInsets = insets
-        self.profileItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 3)
-        
-        tabBar.tintColor = #colorLiteral(red: 0.2523448765, green: 0.5975832939, blue: 0.8585820794, alpha: 1)
-        tabBar.selectedItem = tabBar.items?.first
-        
-        self.floatingButton.alpha = 0.8
+//        tabBar.tintColor = #colorLiteral(red: 0.2523448765, green: 0.5975832939, blue: 0.8585820794, alpha: 1)
+//        tabBar.selectedItem = tabBar.items?.first
+//
     }
     
     func createArray() -> [Information] {
@@ -111,7 +95,7 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 135
+        return 136.2
     }
     
     override func didReceiveMemoryWarning() {
