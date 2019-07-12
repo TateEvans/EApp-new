@@ -47,8 +47,13 @@ class ExperimenterLoginInViewController: UIViewController, UITextFieldDelegate {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if user != nil {
                     self.performSegue(withIdentifier: "goToHome", sender: self)
+                    print("successfully")
                 } else {
                     self.errorMessage(of: error)
+                    if email == ""{
+                        self.alertLabel.text = "*メールアドレスまたはパスワードは\n間違っています"
+                    }
+                    print("fail")
                 }
             }
 
