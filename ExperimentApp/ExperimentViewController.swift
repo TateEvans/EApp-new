@@ -20,7 +20,7 @@ class ExperimentViewController: UIViewController, UITabBarDelegate  {
     @IBAction func informaitonPublish(_ sender: UIButton) {
     }
     
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
